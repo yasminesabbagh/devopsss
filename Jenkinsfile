@@ -87,7 +87,7 @@ pipeline {
         }
 
              
-Farah
+
 stage('SonarCloud Analysis') {
     steps {
         withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {

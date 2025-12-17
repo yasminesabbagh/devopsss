@@ -85,6 +85,17 @@ pipeline {
                 '''
             }
         }
+stage('SonarQube Analysis') {
+    steps {
+        sh '''
+            mvn clean compile
+            mvn sonar:sonar \
+              -Dsonar.host.url=http://192.168.33.10:9000 \
+              -Dsonar.login=admin \
+              -Dsonar.password=sonar
+        '''
+    }
+}
     }
     
     post {

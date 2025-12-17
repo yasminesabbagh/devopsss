@@ -85,17 +85,19 @@ pipeline {
                 '''
             }
         }
-stage('SonarQube Analysis') {
-    steps {
-        sh '''
-            mvn clean compile
-            mvn sonar:sonar \
-              -Dsonar.host.url=http://192.168.33.10:9000 \
-              -Dsonar.login=admin \
-              -Dsonar.password=sonar
-        '''
-    }
-}
+        stage('SonarCloud Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                        mvn sonar:sonar \
+                          -Dsonar.host.url=https://sonarcloud.io \
+                          -Dsonar.organization=yasminesabbagh \
+                          -Dsonar.projectKey=yasminesabbagh_devopsss \
+                          -Dsonar.login=$SONAR_TOKEN
+                    '''
+                }
+            }
+        }
     }
     
     post {

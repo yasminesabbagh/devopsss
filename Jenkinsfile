@@ -86,18 +86,18 @@ pipeline {
             }
         }
         stage('SonarCloud Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
-                    sh '''
-                        mvn sonar:sonar \
-                          -Dsonar.host.url=https://sonarcloud.io \
-                          -Dsonar.organization=yasminesabbagh \
-                          -Dsonar.projectKey=yasminesabbagh_devopsss \
-                          -Dsonar.login=$SONAR_TOKEN
-                    '''
-                }
-            }
+    steps {
+        withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+            sh '''
+                MAVEN_OPTS="-Xmx1024m" mvn sonar:sonar \
+                  -Dsonar.host.url=https://sonarcloud.io \
+                  -Dsonar.organization=yasminesabbagh \
+                  -Dsonar.projectKey=yasminesabbagh_devopsss \
+                  -Dsonar.token=$SONAR_TOKEN
+            '''
         }
+    }
+}
     }
     
     post {

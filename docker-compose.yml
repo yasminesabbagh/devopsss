@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-devopsss
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devopsss_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - devopsss-network
+    restart: unless-stopped
+
+  spring-app:
+    image: yasminesabbagh/devopsss-app:latest
+    container_name: spring-devopsss
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devopsss_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8090:8080"
+    networks:
+      - devopsss-network
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+
+networks:
+  devopsss-network:
+    driver: bridge

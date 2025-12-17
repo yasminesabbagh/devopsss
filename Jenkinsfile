@@ -80,8 +80,8 @@ pipeline {
             steps {
                 echo '🚀 Déploiement avec Docker Compose...'
                 sh '''
-                    docker-compose down || true
-                    docker-compose up -d
+                    docker compose down || true
+                    docker compose up -d
                 '''
             }
         }

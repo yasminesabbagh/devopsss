@@ -103,7 +103,7 @@ stage('SonarCloud Analysis') {
 }
 */
   
-    
+}    
     post {
         success {
             echo '✅ Pipeline exécuté avec succès!'

@@ -86,7 +86,7 @@ pipeline {
             }
         }
 
-/*
+
 stage('SonarCloud Analysis') {
     steps {
         withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
@@ -101,7 +101,7 @@ stage('SonarCloud Analysis') {
         }
     }
 }
-*/
+
   
 }    
     post {
